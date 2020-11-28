@@ -4,7 +4,7 @@ Tarea 4
 
 Análisis de complejidad temporal
 
-El add unicamente tiene que llegar al tail que es el último valor para ahí añadir el elemento deseado y por eso tiene una complejidad de O(n) porque unicamente recorre la lista.
+El add unicamente tiene que añadir un valor al inicio de la lista y como no es necesario recorrerla su complejidad es de O(1).
 
 #Find
 
