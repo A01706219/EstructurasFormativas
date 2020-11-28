@@ -10,7 +10,7 @@ Esta función borra el dato recorriendo el arbol desde la posición 0. Y por est
 
 Top Análisis de complejidad temporal
 
-La función retorna el valor de hasta arriba y no es necesario que recorra entonces para el peor de los casos tenemos O(n).
+La función retorna el valor de hasta arriba y no es necesario que recorra entonces para el peor de los casos tenemos O(1).
 
 Empty Análisis de complejidad temporal
 
@@ -18,4 +18,4 @@ Ya que comparamos count con 0 y devuelve un tipo de dato booleano, tenemos una c
 
 Size Análisis de complejidad temporal
 
-La función devuelve la variable count que es el tamaño del árbol. La complejidad es O(n).
+La función devuelve la variable count que es el tamaño del árbol. La complejidad es O(1).
