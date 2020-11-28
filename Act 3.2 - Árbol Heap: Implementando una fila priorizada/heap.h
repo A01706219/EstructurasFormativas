@@ -35,18 +35,18 @@ unsigned int Heap<T>::parent(unsigned int position) const {
 
 template <class T> //Funcion izquierda
 unsigned int Heap<T>::left(unsigned int position) const {
-	return ((2 * position));
+	return ((2 * position) + 1);
 }
 
 template <class T> //Funcion derecha
 unsigned int Heap<T>::right(unsigned int position) const {
-	return ((2 * position) + 1);
+	return ((2 * position) + 2);
 }
 
 template <class T> //Creamos el constructor de la clase principal
 Heap<T>::Heap(unsigned int _ext){
 	extent = _ext;
-	valor = new T[_ext];
+	valor = new T[extent];
 	count = 0;
 }
 
