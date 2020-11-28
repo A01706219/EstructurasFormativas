@@ -8,118 +8,117 @@
 using namespace std;
 
 template <class T>
-class Heap {
+class Heap{ //Clase principal
 private:
-	T *valor; 
-	int size; 
-	int count; 
-	int parent(int) const; 
-	int left(int) const; 
-	int right(int) const; 
-	void swap(int, int);
-    void heapify(int); 
+	T *valor;
+	unsigned int extent;
+	unsigned int count;
+	unsigned int parent(unsigned int) const;
+	unsigned int left(unsigned int) const;
+	unsigned int right(unsigned int) const;
+	void heapify(unsigned int);
+	void swap(unsigned int, unsigned int);
 public:
-	Heap(int);
-	void push(T); 
-	void pop(); 
-    T top() const; 
-    bool empty() const; 
-    int size() const;
+	Heap(unsigned int);
+	void push(T);
+	T pop();
+  T top();
+	int size() const;
+  bool empty() const;
 	string toString() const;
 };
 
-template <class T>
-Heap<T>::Heap(int _size) { 
-	size = _size;
-	valor = new T[size]; 
+template <class T> //Funcion padre
+unsigned int Heap<T>::parent(unsigned int position) const {
+	return (position - 1) / 2;
+}
+
+template <class T> //Funcion izquierda
+unsigned int Heap<T>::left(unsigned int position) const {
+	return ((2 * position));
+}
+
+template <class T> //Funcion derecha
+unsigned int Heap<T>::right(unsigned int position) const {
+	return ((2 * position) + 1);
+}
+
+template <class T> //Creamos el constructor de la clase principal
+Heap<T>::Heap(unsigned int _ext){
+	extent = _ext;
+	valor = new T[_ext];
 	count = 0;
 }
 
-template <class T>
-int Heap<T>::parent(int pos) const {
-	return (pos - 1) / 2;
-}
-
-template <class T>
-int Heap<T>::left(int pos) const {
-	return ((2 * pos) + 1);
-}
-
-template <class T>
-int Heap<T>::right(int pos) const {
-	return ((2 * pos) + 2);
-}
-
-template <class T>
-string Heap<T>::toString() const {
-	stringstream aux;
-	aux << "[";	for (int i = 0; i < count; i++) {
-		if (i != 0) {
-			aux << " ";
-		} aux << valor[i];
-	} aux << "]";
-	return aux.str();
-}
-
-template <class T>
-void Heap<T>::swap(int i, int j) {
+template <class T> //Funcion para voltear valores dentro del heap
+void Heap<T>::swap(unsigned int i, unsigned int j) {
 	T aux = valor[i];
 	valor[i] = valor[j];
 	valor[j] = aux;
 }
 
 template <class T>
-void Heap<T>::heapify(int pos) {
-	int le = left(pos);
-	int ri = right(pos);
-	int min = pos;
+void Heap<T>::heapify(unsigned int position) {
+	unsigned int le = left(position);
+	unsigned int ri = right(position);
+	unsigned int min = position;
 	if (le <= count && valor[le] < valor[min]) {
 		min = le;
 	}
 	if (ri <= count && valor[ri] < valor[min]) {
 		min = ri;
 	}
-	if (min != pos) {
-		swap(pos, min);
+	if (min != position) {
+		swap(position, min);
 		heapify(min);
 	}
 }
 
 template <class T>
-void Heap<T>::push(T val){ 
-	int pos;
-	pos = count;
+void Heap<T>::push(T val){ //Aniadimos un valor a la fila
+	unsigned int position;
+	position = count;
 	count++;
-
-	while (pos > 0 && val < valor[parent(pos)]) {
-		valor[pos] = valor[parent(pos)];
-		pos = parent(pos);
+	while (position > 0 && val < valor[parent(position)]){
+		valor[position] = valor[parent(position)];
+		position = parent(position);
 	}
-	valor[pos] = val;
+	valor[position] = val;
 }
 
 template <class T>
-void Heap<T>::pop(){
+T Heap<T>::pop(){ //Sacar un valor de la fila
 	T aux = valor[0];
-
 	valor[0] = valor[--count];
 	heapify(0);
-}
-
-template <class T>
-T Heap<T>::top() const{
-	T aux = valor[0];
 	return aux;
 }
 
 template <class T>
-bool Heap<T>::empty() const {
+T Heap<T>::top(){ //Retornar el primer valor de la lista
+  T aux = valor[0];
+  return aux;
+}
+
+template <class T>
+bool Heap<T>::empty() const { //Funcion booleana para  comprobar fila
 	return (count == 0);
 }
 
 template <class T>
-int Heap<T>::size() const{
+int Heap<T>::size() const { //Longitud de la fila
 	return count;
+}
+
+template <class T>
+string Heap<T>::toString() const { //Pasar a string
+	stringstream aux;
+	aux << "[";	for (unsigned int i = 0; i < count; i++) {
+		if (i != 0) {
+			aux << " ";
+		} aux << valor[i];
+	} aux << "]";
+	return aux.str();
 }
 
 #endif
