@@ -2,11 +2,11 @@ SPLAY
 
 Add Análisis de complejidad temporal
 
-Ya que mandamos a llamar recursivamente la función dentro de múltiples condiciones tenemos complejidad de O(n) cuando n es la longitud del arbol.
+La complejidad de esta función es O(log n) al añadir un nuevo valor a la raíz ya que hace un acomodo. 
 
 Remove Análisis de complejidad temporal
 
-En el remove entra el dato que queremos borrar y recorremos todo el arbol con rotaciones hasta encontrar el dato buscado, y por eso es O(n)
+De igual forma el remove ese O(log n) ya que es casi el mismo proceso de acomodar el árbol pero en este caso elimina un valor.
 
 Find Análisis de complejidad temporal
 
@@ -19,4 +19,4 @@ La función retorna el árbol en forma de string pero organizado ya que recorre 
  
 Size Análisis de complejidad temporal
 
-Finalmente en la función size tenemos O(n) ya que imprime el valor de la longitud del árbol donde n es este valor.
+Finalmente en la función size tenemos O(1) ya que imprime el valor de la longitud del árbol donde n es este valor.
