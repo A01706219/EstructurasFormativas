@@ -14,6 +14,16 @@ También tenía mal la complejidad de:
 -add porque puse O(n) y es O(log n).
 -remove porque puse O(n) y es O(log n).
 
--
+-Act 4.1 - Grafo: sus representaciones y sus recorridos
+
+No se podia compilar y aparecia un mensaje en la consola que decia:
+
+terminate called after throwing an instance of 'std::out_of_range'
+ what():  basic_string::substr: __pos (which is 1) > this->size() (which is 0)
+
+-En la linea 55 y 84 olvidé ponerle una condición para checar si el vertice esta vacío. "if(InicializarVertice != "")" y por eso mandaba el error.
+
+
+
 
 
