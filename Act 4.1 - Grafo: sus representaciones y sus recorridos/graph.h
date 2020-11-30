@@ -39,7 +39,7 @@ class Graph { //Creamos la funcion de grafos y definimos sus funciones
 
 void Graph::loadGraphMat(string nombreArch, int vertices, int arcos){ //Esta primera funcion cambia de grafo a una matriz de adjacencia
 	numarcos = arcos;
-	numvertices = vertices; 
+	numvertices = vertices;
 
 	for (int i = 0; i < vertices; i++){
 		vector<int> row(vertices, 0);
@@ -49,28 +49,25 @@ void Graph::loadGraphMat(string nombreArch, int vertices, int arcos){ //Esta pri
 	ifstream file;
 	file.open(nombreArch);
 	while(file.good()){
-		string InicializarVertice; 
+		string InicializarVertice;
 		string FinalizarVertice;
-
 		getline(file, InicializarVertice, ',');
-		getline(file, FinalizarVertice, '\n');
-
-		InicializarVertice = InicializarVertice.substr(1, InicializarVertice.length()-1);
-
-		FinalizarVertice = FinalizarVertice.substr(1, FinalizarVertice.length()-2);
-
-		int InicializarNodo = stoi(InicializarVertice);
-		int FinalizarNodo = stoi(FinalizarVertice);
-		
-		adj_matriz[InicializarNodo][FinalizarNodo] = 1; //Rellenamos la matriz
-		adj_matriz[FinalizarNodo][InicializarNodo] = 1;
+    if(InicializarVertice != ""){
+  		getline(file, FinalizarVertice, '\n');
+  		InicializarVertice = InicializarVertice.substr(1, InicializarVertice.length()-1);
+  		FinalizarVertice = FinalizarVertice.substr(1, FinalizarVertice.length()-2);
+  		int InicializarNodo = stoi(InicializarVertice);
+  		int FinalizarNodo = stoi(FinalizarVertice);
+  		adj_matriz[InicializarNodo][FinalizarNodo] = 1; //Rellenamos la matriz
+  		adj_matriz[FinalizarNodo][InicializarNodo] = 1;
+    }
 	}
 }
 
 void Graph::loadGraphList(string nombreArch, int vertices, int arcos){
 	numvertices = vertices;
 	numarcos = arcos;
-	for (int i=0; i<vertices; i++){ //Aqui creamos la matriz 
+	for (int i=0; i<vertices; i++){ //Aqui creamos la matriz
 		vector<int> row;
 		adj_list.push_back(row);
 	}
@@ -81,13 +78,15 @@ void Graph::loadGraphList(string nombreArch, int vertices, int arcos){
 		string InicializarVertice;
 		string FinalizarVertice;
 		getline(file, InicializarVertice, ',');
-		getline(file, FinalizarVertice, '\n');
-		InicializarVertice = InicializarVertice.substr(1, InicializarVertice.length()-1);
-		FinalizarVertice = FinalizarVertice.substr(1, FinalizarVertice.length()-2);
-		int InicializarNodo = stoi(InicializarVertice);
-		int FinalizarNodo = stoi(FinalizarVertice);
-		adj_list[InicializarNodo].push_back(FinalizarNodo); //Con estas funciones llenamos la matriz
-		adj_list[FinalizarNodo].push_back(InicializarNodo);
+    if(InicializarVertice != ""){
+  		getline(file, FinalizarVertice, '\n');
+  		InicializarVertice = InicializarVertice.substr(1, InicializarVertice.length()-1);
+  		FinalizarVertice = FinalizarVertice.substr(1, FinalizarVertice.length()-2);
+  		int InicializarNodo = stoi(InicializarVertice);
+  		int FinalizarNodo = stoi(FinalizarVertice);
+  		adj_list[InicializarNodo].push_back(FinalizarNodo); //Con estas funciones llenamos la matriz
+  		adj_list[FinalizarNodo].push_back(InicializarNodo);
+    }
 	}
 }
 
@@ -150,14 +149,14 @@ string Graph::DFS(int InicializarVertice, int target_vertex){ //Empezamos con la
 			int temp_index = current;
 			current = adj_list_copy[current].back();
 			adj_list_copy[temp_index].pop_back();
-		} 
+		}
 		else {
 			current = stack[stack.size()-1];
 			stack.pop_back();
 		}
 	}
 	stack.push_back(current); //Aniadimos el valor al stack
-	
+
 	string visited_str = ImprimirVector(visited);
 	string path_str = ImprimirVector(stack);
 	string resultado = "visited: " + visited_str + "path: " + path_str;
